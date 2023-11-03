@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import PageTitle from '$lib/components/ui-elements/PageTitle.svelte'
+  import StatusPill from '$lib/components/ui-elements/StatusPill.svelte'
+</script>
+<PageTitle>
+  Welcome to Expenser
+</PageTitle>
+
+<StatusPill status="in process" />
+<p>Expenser is an expense reporting app that you'll build &mdash; all the while learning Svelte and SvelteKit.</p>
