@@ -15,7 +15,6 @@
     padding: 0 14px 4px 14px;
     height: 22px;
     line-height: 22px;
-    /* padding-bottom: 3px; */
     font-variant: small-caps;
   }
 
@@ -34,7 +33,7 @@
     color:black
   }
 
-  .denied {
+  .needs-review {
     background-color: red;
     color: white;
   }
