@@ -14,19 +14,34 @@ export class Department{
       this.db.exec(creationString)
   }
 
-  async create(name) {
-    return await this.db.departments.create({
+  create(name) {
+    // create a statement using this.db.prepare()
+    const stmt = this.db.prepare(`
+      INSERT INTO departments (
+        name
+      ) 
+      VALUES (
+        :name
+      )
+    `)
+    
+    // run the statement with the data for the new department (no need to return anything)
+    stmt.run({
       name
-    });
+    })
   }
 
-  async findByName(name) {
-    const stmt = db.prepare('SELECT * FROM departments WHERE name = ?');
+  findByName(name) {
+    // create a statement using this.db.prepare()
+    const stmt = db.prepare('SELECT * FROM departments WHERE name = :name');
+    // get the statement to return the department with the given name
     return stmt.get(name);
   }
 
-  async findAll() {
+  findAll() {
+    // create a statement using this.db.prepare()
     const stmt = db.prepare('SELECT * FROM departments');
+    // all the statement to return all departments
     return stmt.all();
   }
 

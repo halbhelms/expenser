@@ -14,19 +14,34 @@ export class Category{
       this.db.exec(creationString)
   }
 
-  async create(name) {
-    return await this.db.categories.create({
+  create(name) {
+    // create a statement using this.db.prepare()
+    const stmt = this.db.prepare(`
+      INSERT INTO categories (
+        name
+      ) 
+      VALUES (
+        :name
+      )
+    `)
+
+    // run the statement with the data for the new category (no need to return anything)
+    stmt.run({
       name
     })
   }
 
-  async findByName(name) {
-    const stmt = db.prepare('SELECT * FROM categories WHERE name = ?');
-    return stmt.get(name);
+  findByName(name) {
+    // create a statement using this.db.prepare()
+    const stmt = db.prepare('SELECT * FROM categories WHERE name = :name');
+    // get the statement to return the category with the given name
+    return stmt.get({name})
   }
 
-  async findAll() {
+  findAll() {
+    // create a statement using this.db.prepare()
     const stmt = db.prepare('SELECT * FROM categories');
+    // all the statement to return all categories
     return stmt.all();
   }
 

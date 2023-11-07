@@ -1,28 +1,17 @@
 export class UserRole{
-  constructor(db) {
-    this.db = db;
+  constructor() {
+    this.userRoles = {
+      APP_USER: 1,
+      MANAGER: 2,
+      SUPER_ADMIN: 3,
+    }
+  }   
+  
+  findByName(name) {
+    return this.userRoles[name]
   }
 
-  init() {
-    const creationString = `
-      CREATE TABLE IF NOT EXISTS user_roles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE,
-        is_active INTEGER DEFAULT 1,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    `
-      this.db.exec(creationString)
+  findById(id) {
+    return Object.keys(this.userRoles).find(key => this.userRoles[key] === id)
   }
-
-  async create(name) {
-    return await this.db.user_roles.create({
-      name
-    });
-  }
-
-  async findAll() {
-    const stmt = db.prepare('SELECT * FROM user_roles');
-    return stmt.all();
-  }
-
 }
